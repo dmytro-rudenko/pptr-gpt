@@ -1,4 +1,4 @@
-## Node.js ChatGPT Module
+## PPTR-GPT - Node.js ChatGPT Module
 
 This Node.js module allows you to interact with the ChatGPT website(https://chat.openai.com) using Puppeteer. It enables you to send messages to ChatGPT and receive responses, as well as create conversational sessions with the ability to send multiple messages and retrieve the conversation history.
 
