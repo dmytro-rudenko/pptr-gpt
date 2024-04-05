@@ -7,7 +7,13 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "puppeteer",
+    "chatgpt",
+    "openai",
+    "gpt",
+    "ai"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
