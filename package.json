@@ -1,0 +1,25 @@
+{
+  "name": "pptr-gpt",
+  "version": "0.0.2",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "html-to-text": "^9.0.5",
+    "puppeteer": "^22.6.2",
+    "puppeteer-core": "^22.6.2",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  },
+  "devDependencies": {
+    "@types/html-to-text": "^9.0.4",
+    "@types/puppeteer": "^7.0.4",
+    "typescript": "^5.4.4"
+  }
+}
