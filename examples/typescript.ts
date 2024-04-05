@@ -1,4 +1,4 @@
-import * as chatGpt from '../index';
+import * as chatGpt from 'pptr-gpt';
 
 const test = async () => {
   await chatGpt.init();
