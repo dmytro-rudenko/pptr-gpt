@@ -66,7 +66,7 @@ await chatGpt.close();
 Here's a complete example that demonstrates the usage of the module:
 
 ```javascript
-const chatGpt = require('<module-name>');
+const chatGpt = require('pptr-gpt');
 
 const test = async () => {
   await chatGpt.init();
