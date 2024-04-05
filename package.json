@@ -14,10 +14,16 @@
     "gpt",
     "ai"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "https://github.com/dmytro-rudenko",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dmytro-rudenko/pptr-gpt.git"
+  },
+  "homepage": "https://github.com/dmytro-rudenko/pptr-gpt#readme",
+  "license": "MIT",
   "dependencies": {
     "html-to-text": "^9.0.5",
+    "pptr-gpt": "^0.0.5",
     "puppeteer": "^22.6.2",
     "puppeteer-core": "^22.6.2",
     "puppeteer-extra": "^3.3.6",
