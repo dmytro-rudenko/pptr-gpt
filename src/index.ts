@@ -30,7 +30,9 @@ const init = async (): Promise<void> => {
 const singleMessage = async (text: string): Promise<string> => {
   const page = await pptr.goTo(CHAT_GPT_URL);
 
-  await page.waitForSelector("#prompt-textarea");
+  await page.waitForSelector("#prompt-textarea", {
+    timeout: 60_000 * 5,
+  });
   await typeClick(page, text);
 
   const response = await page.evaluate(async () => {
@@ -136,6 +138,9 @@ const createChat = async (text: string): Promise<{
     await page.close();
   };
 
+  await page.waitForSelector("#prompt-textarea", {
+    timeout: 60_000 * 5,
+  });
   const response = await send(text);
 
   return {

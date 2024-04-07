@@ -46,7 +46,9 @@ const init = async () => {
 exports.init = init;
 const singleMessage = async (text) => {
     const page = await pptr.goTo(CHAT_GPT_URL);
-    await page.waitForSelector("#prompt-textarea");
+    await page.waitForSelector("#prompt-textarea", {
+        timeout: 60000 * 5,
+    });
     await typeClick(page, text);
     const response = await page.evaluate(async () => {
         var _a;
@@ -117,6 +119,9 @@ const createChat = async (text) => {
     const close = async () => {
         await page.close();
     };
+    await page.waitForSelector("#prompt-textarea", {
+        timeout: 60000 * 5,
+    });
     const response = await send(text);
     return {
         response,
