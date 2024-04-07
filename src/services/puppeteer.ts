@@ -7,7 +7,7 @@ let browser: any = null;
 
 const init = async (options = {}): Promise<any> => {
   browser = await puppeteer.launch({
-    headless: false,
+    headless: 'shell',
     ignoreDefaultArgs: ['--enable-automation', '--no-sandbox', '--disable-setuid-sandbox', '--incognito'],
     ...options,
   });

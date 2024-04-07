@@ -1,4 +1,4 @@
-const chatGpt = require('pptr-gpt');
+const chatGpt = require('../index');
 
 const test = async () => {
   await chatGpt.init();
