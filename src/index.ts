@@ -57,16 +57,14 @@ const singleMessage = async (text: string): Promise<string> => {
   if (screenshots) {
     await page.screenshot({ path: path.join(__dirname, 'public/screenshot.png') });
 
-    setTimeout(async () => {
-      await page.screenshot({ path: path.join(__dirname, 'public/screenshot2.png') });
-    }, 10000)
   }
   await page.waitForSelector("#prompt-textarea", {
     timeout: 60_000
   });
   await typeClick(page, text);
+
   if (screenshots) {
-    await page.screenshot({ path: path.join(__dirname, 'public/screenshot3.png') });
+    await page.screenshot({ path: path.join(__dirname, 'public/screenshot2.png') });
   }
 
   const response = await page.evaluate(async () => {
@@ -115,7 +113,13 @@ const createChat = async (text: string): Promise<{
   const page = await pptr.goTo(CHAT_GPT_URL);
 
   const send = async (message: string): Promise<string> => {
+    const screenshots = storage.get('screenshots');
+  
     await typeClick(page, message);
+  
+    if (screenshots) {
+      await page.screenshot({ path: path.join(__dirname, `public/screenshot-${responseMessageId + 1}.png`) });
+    }
 
     history.push({
       role: Role.USER,
