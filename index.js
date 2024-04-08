@@ -22,10 +22,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.close = exports.createChat = exports.singleMessage = exports.init = void 0;
 const pptr = __importStar(require("./services/puppeteer"));
 const html_to_text_1 = require("html-to-text");
+const storage_1 = __importDefault(require("./services/storage"));
+const path_1 = __importDefault(require("path"));
 const CHAT_GPT_URL = "https://chat.openai.com";
 const PREPAND = "ChatGPT\nChatGPT";
 const HTML_TO_TEXT_OPTIONS = {
@@ -40,16 +45,34 @@ const typeClick = async (page, text) => {
     await page.type("#prompt-textarea", text);
     await page.click("button[data-testid='send-button']");
 };
-const init = async () => {
-    await pptr.init();
+const init = async (options) => {
+    const params = {};
+    if (options.headless) {
+        params['headless'] = options.headless;
+    }
+    if (options.screenshots) {
+        storage_1.default.set('screenshots', options.screenshots.toString());
+    }
+    await pptr.init(params);
 };
 exports.init = init;
 const singleMessage = async (text) => {
     const page = await pptr.goTo(CHAT_GPT_URL);
+    const screenshots = storage_1.default.get('screenshots') === 'true';
+    // screenshot
+    if (screenshots) {
+        await page.screenshot({ path: path_1.default.join(__dirname, 'public/screenshot.png') });
+        setTimeout(async () => {
+            await page.screenshot({ path: path_1.default.join(__dirname, 'public/screenshot2.png') });
+        }, 30000);
+    }
     await page.waitForSelector("#prompt-textarea", {
         timeout: 60000
     });
     await typeClick(page, text);
+    if (screenshots) {
+        await page.screenshot({ path: path_1.default.join(__dirname, 'public/screenshot3.png') });
+    }
     const response = await page.evaluate(async () => {
         var _a;
         let prevText = null;

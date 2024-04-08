@@ -6,7 +6,10 @@ interface ChatHistory {
     role: Role;
     content: string;
 }
-declare const init: () => Promise<void>;
+declare const init: (options: {
+    headless?: boolean;
+    screenshots?: boolean;
+}) => Promise<void>;
 declare const singleMessage: (text: string) => Promise<string>;
 declare const createChat: (text: string) => Promise<{
     response: string;

@@ -1,5 +1,7 @@
 import * as pptr from "./services/puppeteer";
 import { convert } from "html-to-text";
+import storage from "./services/storage";
+import path from "path";
 
 const CHAT_GPT_URL = "https://chat.openai.com";
 const PREPAND = "ChatGPT\nChatGPT";
@@ -23,17 +25,43 @@ const typeClick = async (page: any, text: string): Promise<void> => {
   await page.click("button[data-testid='send-button']");
 };
 
-const init = async (): Promise<void> => {
-  await pptr.init();
+const init = async (options: {
+  headless?: boolean;
+  screenshots?: boolean;
+}): Promise<void> => {
+  const params: {
+    headless?: boolean
+  } = {}
+
+  if (options.headless) {
+    params['headless'] = options.headless
+  }
+
+  if (options.screenshots) {
+    storage.set('screenshots', options.screenshots.toString())
+  }
+
+  await pptr.init(params);
 };
 
 const singleMessage = async (text: string): Promise<string> => {
   const page = await pptr.goTo(CHAT_GPT_URL);
+  const screenshots = storage.get('screenshots') === 'true';
+  // screenshot
+  if (screenshots) {
+    await page.screenshot({ path: path.join(__dirname, 'public/screenshot.png') });
 
+    setTimeout(async () => {
+      await page.screenshot({ path: path.join(__dirname, 'public/screenshot2.png') });
+    }, 30000)
+  }
   await page.waitForSelector("#prompt-textarea", {
     timeout: 60_000
   });
   await typeClick(page, text);
+  if (screenshots) {
+    await page.screenshot({ path: path.join(__dirname, 'public/screenshot3.png') });
+  }
 
   const response = await page.evaluate(async () => {
     let prevText: string | null = null;

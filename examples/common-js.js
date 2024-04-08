@@ -1,7 +1,9 @@
 const chatGpt = require('../index');
 
 const test = async () => {
-  await chatGpt.init();
+  await chatGpt.init({
+    screenshots: true
+  });
 
   const answer = await chatGpt.singleMessage(`Write a story about dog, software engineer, and node.js`);
   console.log("---Single Message---");
