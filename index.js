@@ -24,7 +24,6 @@ const typeClick = async (page, text) => {
     await page.click("button[data-testid='send-button']");
 };
 const init = async (options) => {
-    console.log('init chatgpt options', options);
     const params = {};
     if (options.hasOwnProperty('headless')) {
         params.headless = options.headless;
@@ -36,7 +35,6 @@ const init = async (options) => {
             fs_1.default.mkdirSync(path_1.default.join(__dirname, 'public'));
         }
     }
-    console.log('chatgpt pptr init', params);
     await puppeteer_1.default.init(params);
 };
 exports.init = init;
