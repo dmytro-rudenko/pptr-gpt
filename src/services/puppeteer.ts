@@ -9,8 +9,6 @@ const usePuppeteer = () => {
   const init = async (options: {
     headless?: boolean | 'shell' | undefined;
   }): Promise<any> => {
-    console.log('init options', options);
-
     const params: {
       headless?: boolean | 'shell' | undefined
       ignoreDefaultArgs?: string[]
@@ -19,8 +17,6 @@ const usePuppeteer = () => {
       ignoreDefaultArgs: ['--enable-automation', '--no-sandbox', '--disable-setuid-sandbox', '--incognito'],
       ...options,
     }
-
-    console.log('browser params', params);
 
     browser = await puppeteer.launch(params);
 
