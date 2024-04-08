@@ -3,26 +3,42 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 
 puppeteer.use(StealthPlugin());
 
-let browser: any = null;
+const usePuppeteer = () => {
+  let browser: any = null;
 
-const init = async (options = {}): Promise<any> => {
-  browser = await puppeteer.launch({
-    headless: 'shell',
-    ignoreDefaultArgs: ['--enable-automation', '--no-sandbox', '--disable-setuid-sandbox', '--incognito'],
-    ...options,
-  });
-  return browser;
-};
+  const init = async (options: {
+    headless?: boolean | 'shell' | undefined;
+  }): Promise<any> => {
+    console.log('init options', options);
 
-const goTo = async (url: string): Promise<any> => {
-  const page = await browser!.newPage();
-  await page.goto(url);
-  await page.setViewport({ width: 1360, height: 980, deviceScaleFactor: 1 });
-  return page;
-};
+    const params: {
+      headless?: boolean | 'shell' | undefined
+      ignoreDefaultArgs?: string[]
+    } = {
+      headless: 'shell',
+      ignoreDefaultArgs: ['--enable-automation', '--no-sandbox', '--disable-setuid-sandbox', '--incognito'],
+      ...options,
+    }
 
-const close = async (): Promise<void> => {
-  await browser!.close();
-};
+    console.log('browser params', params);
 
-export { browser, init, goTo, close };
+    browser = await puppeteer.launch(params);
+
+    return browser;
+  };
+
+  const goTo = async (url: string): Promise<any> => {
+    const page = await browser!.newPage();
+    await page.goto(url);
+    await page.setViewport({ width: 1360, height: 980, deviceScaleFactor: 1 });
+    return page;
+  };
+
+  const close = async (): Promise<void> => {
+    await browser!.close();
+  };
+
+  return { browser, init, goTo, close };
+}
+
+export default usePuppeteer()

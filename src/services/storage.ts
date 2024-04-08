@@ -1,6 +1,6 @@
-const useStorage = () => {
-    const storage = new Map();
+const storage = new Map();
 
+const useStorage = () => {
     return {
         get(key: string) {
             return storage.get(key);

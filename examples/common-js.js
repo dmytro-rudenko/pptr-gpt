@@ -2,7 +2,8 @@ const chatGpt = require('../index');
 
 const test = async () => {
   await chatGpt.init({
-    screenshots: true
+    screenshots: true,
+    headless: 'shell'
   });
 
   const answer = await chatGpt.singleMessage(`Write a story about dog, software engineer, and node.js`);
@@ -22,8 +23,8 @@ const test = async () => {
 
   console.log('history', chat.history);
 
-  await chat.close();
-  await chatGpt.close();
+  // await chat.close();
+  // await chatGpt.close();
 };
 
 test();

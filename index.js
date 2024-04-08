@@ -1,36 +1,14 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.close = exports.createChat = exports.singleMessage = exports.init = void 0;
-const pptr = __importStar(require("./services/puppeteer"));
+const puppeteer_1 = __importDefault(require("./services/puppeteer"));
 const html_to_text_1 = require("html-to-text");
 const storage_1 = __importDefault(require("./services/storage"));
 const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
 const CHAT_GPT_URL = "https://chat.openai.com";
 const PREPAND = "ChatGPT\nChatGPT";
 const HTML_TO_TEXT_OPTIONS = {
@@ -46,25 +24,31 @@ const typeClick = async (page, text) => {
     await page.click("button[data-testid='send-button']");
 };
 const init = async (options) => {
+    console.log('init chatgpt options', options);
     const params = {};
-    if (options.headless) {
-        params['headless'] = options.headless;
+    if (options.hasOwnProperty('headless')) {
+        params.headless = options.headless;
     }
-    if (options.screenshots) {
-        storage_1.default.set('screenshots', options.screenshots.toString());
+    if (options.hasOwnProperty('screenshots')) {
+        storage_1.default.set('screenshots', String(options.screenshots));
+        // create public directory if it doesn't exist
+        if (!fs_1.default.existsSync(path_1.default.join(__dirname, 'public'))) {
+            fs_1.default.mkdirSync(path_1.default.join(__dirname, 'public'));
+        }
     }
-    await pptr.init(params);
+    console.log('chatgpt pptr init', params);
+    await puppeteer_1.default.init(params);
 };
 exports.init = init;
 const singleMessage = async (text) => {
-    const page = await pptr.goTo(CHAT_GPT_URL);
-    const screenshots = storage_1.default.get('screenshots') === 'true';
+    const page = await puppeteer_1.default.goTo(CHAT_GPT_URL);
+    const screenshots = storage_1.default.get('screenshots');
     // screenshot
     if (screenshots) {
         await page.screenshot({ path: path_1.default.join(__dirname, 'public/screenshot.png') });
         setTimeout(async () => {
             await page.screenshot({ path: path_1.default.join(__dirname, 'public/screenshot2.png') });
-        }, 30000);
+        }, 10000);
     }
     await page.waitForSelector("#prompt-textarea", {
         timeout: 60000
@@ -101,7 +85,7 @@ exports.singleMessage = singleMessage;
 const createChat = async (text) => {
     let responseMessageId = 3;
     const history = [];
-    const page = await pptr.goTo(CHAT_GPT_URL);
+    const page = await puppeteer_1.default.goTo(CHAT_GPT_URL);
     const send = async (message) => {
         await typeClick(page, message);
         history.push({
@@ -155,6 +139,6 @@ const createChat = async (text) => {
 };
 exports.createChat = createChat;
 const close = async () => {
-    await pptr.close();
+    await puppeteer_1.default.close();
 };
 exports.close = close;

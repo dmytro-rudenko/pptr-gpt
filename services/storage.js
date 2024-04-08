@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const storage = new Map();
 const useStorage = () => {
-    const storage = new Map();
     return {
         get(key) {
             return storage.get(key);

@@ -1,7 +1,8 @@
-import * as pptr from "./services/puppeteer";
+import pptr from "./services/puppeteer";
 import { convert } from "html-to-text";
 import storage from "./services/storage";
 import path from "path";
+import fs from "fs";
 
 const CHAT_GPT_URL = "https://chat.openai.com";
 const PREPAND = "ChatGPT\nChatGPT";
@@ -33,12 +34,17 @@ const init = async (options: {
     headless?: boolean
   } = {}
 
-  if (options.headless) {
-    params['headless'] = options.headless
+  if (options.hasOwnProperty('headless')) {
+    params.headless = options.headless
   }
 
-  if (options.screenshots) {
-    storage.set('screenshots', options.screenshots.toString())
+  if (options.hasOwnProperty('screenshots')) {
+    storage.set('screenshots', String(options.screenshots) as string)
+
+    // create public directory if it doesn't exist
+    if (!fs.existsSync(path.join(__dirname, 'public'))) {
+      fs.mkdirSync(path.join(__dirname, 'public'));
+    }
   }
 
   await pptr.init(params);
@@ -46,14 +52,14 @@ const init = async (options: {
 
 const singleMessage = async (text: string): Promise<string> => {
   const page = await pptr.goTo(CHAT_GPT_URL);
-  const screenshots = storage.get('screenshots') === 'true';
+  const screenshots = storage.get('screenshots');
   // screenshot
   if (screenshots) {
     await page.screenshot({ path: path.join(__dirname, 'public/screenshot.png') });
 
     setTimeout(async () => {
       await page.screenshot({ path: path.join(__dirname, 'public/screenshot2.png') });
-    }, 30000)
+    }, 10000)
   }
   await page.waitForSelector("#prompt-textarea", {
     timeout: 60_000

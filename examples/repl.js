@@ -1,5 +1,5 @@
 const readline = require('node:readline/promises');
-const chatGpt = require("pptr-gpt");
+const chatGpt = require("../index");
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -7,7 +7,9 @@ const rl = readline.createInterface({
 })
 
 const repl = async () => {
-    await chatGpt.init();
+    await chatGpt.init({
+        headless: false
+    });
     
     const userQuery = await rl.question('You: ');
 
