@@ -1,6 +1,6 @@
 {
   "name": "pptr-gpt",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "This Node.js module allows you to interact with the ChatGPT website(https://chat.openai.com) using Puppeteer",
   "main": "index.js",
   "scripts": {
