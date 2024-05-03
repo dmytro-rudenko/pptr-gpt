@@ -81,7 +81,7 @@ const server = async (port) => {
                 }
             }
         }, 1000 * 60 * 5);
-        console.log(`Server running on port ${port}`);
+        console.log(`pptr-gpt running on port ${port}`);
     });
     // process on exit
     process.on("SIGINT", async () => {
