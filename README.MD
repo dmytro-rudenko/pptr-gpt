@@ -6,7 +6,9 @@ This Node.js module allows you to interact with the ChatGPT website(https://chat
 To install the module, run the following command:
 
 ```bash
-npm install pptr-gpt
+npm install pptr-gpt 
+# or global
+npm install pptr-gpt -g
 ```
 
 ### Usage
@@ -16,14 +18,14 @@ First, import the required functions from the module:
 const chatGpt = require('pptr-gpt');
 ```
 
-### Initialization
+#### Initialization
 Before using the module, you need to initialize Puppeteer:
 
 ```javascript
 await chatGpt.init()
 ```
 
-### Single message
+#### Single message
 To send a single message to ChatGPT and receive the response, use the `singleMessage` function:
 
 ```javascript
@@ -31,7 +33,7 @@ const answer = await chatGpt.singleMessage(`Write a story about dog, software en
 console.log(answer);
 ```
 
-### Create Chat Session
+#### Create Chat Session
 
 To create a conversational session with ChatGPT, use the `createChat` function:
 
@@ -54,7 +56,7 @@ console.log(nextResponse);
 console.log('history', chat.history);
 ```
 
-### Closing Sessions
+#### Closing Sessions
 After you're done using the module, you should close the Puppeteer session:
 
 ```javascript
@@ -96,9 +98,9 @@ test();
 
 This example demonstrates the following:
 
-Initializing the module.
-Sending a single message to ChatGPT and logging the response.
-Creating a chat session and logging the initial response.
-Sending an additional message during the chat session and logging the response.
-Logging the conversation history.
-Closing the chat session and Puppeteer session.
+1. Initializing the module.
+2. Sending a single message to ChatGPT and logging the response.
+3. Creating a chat session and logging the initial response.
+4. Sending an additional message during the chat session and logging the response.
+5. Logging the conversation history.
+6. Closing the chat session and Puppeteer session.
