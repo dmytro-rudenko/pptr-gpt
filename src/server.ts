@@ -19,7 +19,7 @@ const server = async (port: number) => {
 
     await pptrGpt.init({
         screenshots: false,
-        headless: false,
+        headless: true,
     });
 
     app.get("/", (req, res) => {
