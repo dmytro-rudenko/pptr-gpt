@@ -6,6 +6,7 @@
   "bin": {
     "pprt-gpt": "./server.js"
   },
+  "preferGlobal": true,
   "scripts": {
     "build": "tsc",
     "deploy": "git add . && git commit -m \"update\" && git push && npm version patch && npm publish",
