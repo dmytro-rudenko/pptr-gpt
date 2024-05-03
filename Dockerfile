@@ -32,10 +32,10 @@ RUN addgroup -S pptruser && adduser -S -G pptruser pptruser \
 WORKDIR /app
 COPY . /app
 
-RUN npm install
+RUN npm install pprt-gpt -g
 
 RUN chmod -R 777 ./node_modules
 
 USER pptruser
 
-CMD ["node", "server.js"]
+CMD ["pprt-gpt", "serve"]

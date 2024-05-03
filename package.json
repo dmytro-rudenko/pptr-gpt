@@ -4,7 +4,7 @@
   "description": "This Node.js module allows you to interact with the ChatGPT website(https://chat.openai.com) using Puppeteer",
   "main": "index.js",
   "bin": {
-    "pprt-gpt": "./server.js"
+    "pprt-gpt": "./index.js"
   },
   "preferGlobal": true,
   "scripts": {
@@ -27,20 +27,25 @@
   "homepage": "https://github.com/dmytro-rudenko/pptr-gpt#readme",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
     "html-to-text": "^9.0.5",
+    "morgan": "^1.10.0",
     "puppeteer": "^22.6.2",
     "puppeteer-core": "^22.6.2",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "morgan": "^1.10.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
     "@types/html-to-text": "^9.0.4",
+    "@types/morgan": "^1.9.9",
     "@types/puppeteer": "^7.0.4",
+    "@types/uuid": "^9.0.8",
     "typescript": "^5.4.4"
   }
 }

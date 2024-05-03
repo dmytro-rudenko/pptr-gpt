@@ -1,7 +1,7 @@
 version: "3.9"
 services:
-  server:
-    container_name: server
+  pptr-gpt-server:
+    container_name: pprt-gpt-server
     build:
       context: .
       dockerfile: Dockerfile
