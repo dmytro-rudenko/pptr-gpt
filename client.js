@@ -2,7 +2,6 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const puppeteer_1 = __importDefault(require("./services/puppeteer"));
 const html_to_text_1 = require("html-to-text");
 const storage_1 = __importDefault(require("./services/storage"));
@@ -137,4 +136,4 @@ const close = async () => {
     await puppeteer_1.default.close();
 };
 const client = { init, singleMessage, createChat, close };
-exports.default = client;
+module.exports = client;

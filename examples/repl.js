@@ -1,5 +1,5 @@
 const readline = require('node:readline/promises');
-const chatGpt = require("../index");
+const chatGpt = require("../index")
 
 const rl = readline.createInterface({
     input: process.stdin,

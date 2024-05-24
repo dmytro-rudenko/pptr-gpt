@@ -29,4 +29,4 @@ if (options.help) {
     `);
 }
 
-export default client
+export = client

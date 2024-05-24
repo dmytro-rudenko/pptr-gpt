@@ -3,7 +3,6 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const command_line_args_1 = __importDefault(require("command-line-args"));
 const server_1 = __importDefault(require("./server"));
 const client_1 = __importDefault(require("./client"));
@@ -27,4 +26,4 @@ if (options.help) {
     -h, --help          Display help
     `);
 }
-exports.default = client_1.default;
+module.exports = client_1.default;

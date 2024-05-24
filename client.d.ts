@@ -20,4 +20,4 @@ declare const client: {
     }>;
     close: () => Promise<void>;
 };
-export default client;
+export = client;

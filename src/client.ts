@@ -195,4 +195,4 @@ const close = async (): Promise<void> => {
 
 const client = { init, singleMessage, createChat, close };
 
-export default client;
+export = client;

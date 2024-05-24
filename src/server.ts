@@ -118,4 +118,4 @@ const server = async (port: number) => {
     });
 };
 
-export default server
+export = server

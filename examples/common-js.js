@@ -1,4 +1,4 @@
-const chatGpt = require('../index');
+const chatGpt = require('../index')
 
 const test = async () => {
   await chatGpt.init({
