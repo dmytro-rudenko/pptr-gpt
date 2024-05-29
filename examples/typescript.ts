@@ -1,7 +1,7 @@
-import * as chatGpt from 'pptr-gpt';
+import chatGpt from '../index.js';
 
 const test = async () => {
-  await chatGpt.init();
+  await chatGpt.init({});
 
   const answer = await chatGpt.singleMessage(`Write a story about dog, software engineer, and node.js`);
   console.log("---Single Message---");
