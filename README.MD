@@ -17,7 +17,7 @@ npm install pptr-gpt -g
 You can run the module as a CLI application. The following options are available:
 
 ```bash
-Usage: chat-gpt [options]
+Usage: pptr-gpt [options]
 
 Options:
 -s, --serve         Start the server
