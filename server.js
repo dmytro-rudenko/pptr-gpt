@@ -8,7 +8,7 @@ const client_1 = __importDefault(require("./client"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const uuid_1 = require("uuid");
-const server = async (port) => {
+const server = async ({ port = 3000, headless = true, }) => {
     const app = (0, express_1.default)();
     const chats = {};
     app.use(body_parser_1.default.json());
@@ -18,10 +18,12 @@ const server = async (port) => {
     }));
     await client_1.default.init({
         screenshots: false,
-        headless: true,
+        headless,
     });
     app.get("/", (req, res) => {
-        res.send("pptr-gpt api running");
+        res.json({
+            message: "pptr-gpt api running"
+        });
     });
     app.post("/ask", async (req, res) => {
         try {

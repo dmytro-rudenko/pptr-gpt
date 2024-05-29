@@ -5,7 +5,10 @@ import morgan from "morgan";
 import cors from "cors";
 import { v4 as uuid } from "uuid";
 
-const server = async (port: number) => {
+const server = async ({
+    port = 3000,
+    headless = true,
+}) => {
     const app = express();
     const chats: { [id: string]: any } = {};
 
@@ -19,11 +22,13 @@ const server = async (port: number) => {
 
     await pptrGpt.init({
         screenshots: false,
-        headless: true,
+        headless,
     });
 
     app.get("/", (req, res) => {
-        res.send("pptr-gpt api running");
+        res.json({
+            message: "pptr-gpt api running"
+        });
     });
 
     app.post("/ask", async (req, res) => {
