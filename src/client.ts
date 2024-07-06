@@ -22,7 +22,10 @@ interface ChatHistory {
 }
 
 const typeClick = async (page: any, text: string): Promise<void> => {
-  await page.type("#prompt-textarea", text);
+  
+  await page.keyboard.sendCharacter(text).catch((err: any) => {
+    console.log(err)
+  })
   await page.click("button[data-testid='send-button']");
 };
 
