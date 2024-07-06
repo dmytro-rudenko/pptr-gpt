@@ -18,7 +18,9 @@ var Role;
     Role["ASSISTANT"] = "assistant";
 })(Role || (Role = {}));
 const typeClick = async (page, text) => {
-    await page.type("#prompt-textarea", text);
+    await page.keyboard.sendCharacter(text).catch((err) => {
+        console.log(err);
+    });
     await page.click("button[data-testid='send-button']");
 };
 const init = async (options) => {

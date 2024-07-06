@@ -32,6 +32,7 @@ const server = async ({ port = 3000, headless = true, }) => {
             res.json({ answer });
         }
         catch (error) {
+            console.log('err', error);
             res.status(500).json({ error: "Something went wrong" });
         }
     });
