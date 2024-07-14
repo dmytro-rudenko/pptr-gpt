@@ -8,7 +8,7 @@ const storage_1 = __importDefault(require("./services/storage"));
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 const CHAT_GPT_URL = "https://chat.openai.com";
-const PREPAND = "ChatGPT\nChatGPT";
+const PREPAND = "ChatGPT";
 const HTML_TO_TEXT_OPTIONS = {
     wordwrap: 130,
 };

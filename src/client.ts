@@ -5,7 +5,7 @@ import path from "path";
 import fs from "fs";
 
 const CHAT_GPT_URL = "https://chat.openai.com";
-const PREPAND = "ChatGPT\nChatGPT";
+const PREPAND = "ChatGPT";
 
 const HTML_TO_TEXT_OPTIONS = {
   wordwrap: 130,
