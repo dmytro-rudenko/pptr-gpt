@@ -26,7 +26,7 @@ const typeClick = async (page: any, text: string): Promise<void> => {
   await page.keyboard.sendCharacter(text).catch((err: any) => {
     console.log(err)
   })
-  await page.click("button[data-testid='send-button']");
+  await page.click("button[data-testid='fruitjuice-send-button']"); 
 };
 
 const init = async (options: {

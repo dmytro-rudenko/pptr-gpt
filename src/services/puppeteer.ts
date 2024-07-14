@@ -11,7 +11,7 @@ const usePuppeteer = () => {
   }): Promise<any> => {
     const params: {
       headless?: boolean | 'shell' | undefined
-      ignoreDefaultArgs?: string[]
+      ignoreDefaultArgs: string[]
     } = {
       headless: 'shell',
       ignoreDefaultArgs: ['--enable-automation', '--no-sandbox', '--disable-setuid-sandbox', '--incognito'],
