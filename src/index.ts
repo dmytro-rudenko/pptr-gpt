@@ -21,7 +21,7 @@ if (options.serve) {
 
 if (options.help) {
     console.log(`
-    Usage: chat-gpt [options]
+    Usage: pptr-gpt [options]
 
     Options:
     -s, --serve         Start the server
